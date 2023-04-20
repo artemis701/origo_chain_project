@@ -6,10 +6,10 @@ order: 8
 
 ## CLI
 
-Find below a list of  `origod` commands added with the  `x/erc20` module. You can obtain the full list by using the `origod -h` command. A CLI command can look like this:
+Find below a list of  `exad` commands added with the  `x/erc20` module. You can obtain the full list by using the `exad -h` command. A CLI command can look like this:
 
 ```bash
-origod query erc20 params
+exad query erc20 params
 ```
 
 ### Queries
@@ -36,7 +36,7 @@ The `tx gov submit-proposal` commands allow users to query create a proposal usi
 Allows users to submit a `RegisterCoinProposal`. Submit a proposal to register a Cosmos coin to the erc20 along with an initial deposit. Upon passing, the proposal details must be supplied via a JSON file.
 
 ```bash
-origod tx gov submit-proposal register-coin METADATA_FILE [flags]
+exad tx gov submit-proposal register-coin METADATA_FILE [flags]
 ```
 
 Where METADATA_FILE contains (example):
@@ -71,7 +71,7 @@ Where METADATA_FILE contains (example):
 Allows users to submit a `RegisterERC20Proposal`. Submit a proposal to register ERC20 tokens along with an initial deposit. To register multiple tokens in one proposal pass them after each other e.g. `register-erc20 <contract-address1> <contract-address2>`.
 
 ```bash
-origod tx gov submit-proposal register-erc20 ERC20_ADDRESS... [flags]
+exad tx gov submit-proposal register-erc20 ERC20_ADDRESS... [flags]
 ```
 
 **`toggle-token-conversion`**
@@ -79,7 +79,7 @@ origod tx gov submit-proposal register-erc20 ERC20_ADDRESS... [flags]
 Allows users to submit a `ToggleTokenConversionProposal`.
 
 ```bash
-origod tx gov submit-proposal toggle-token-conversion TOKEN [flags]
+exad tx gov submit-proposal toggle-token-conversion TOKEN [flags]
 ```
 
 **`param-change`**
@@ -87,7 +87,7 @@ origod tx gov submit-proposal toggle-token-conversion TOKEN [flags]
 Allows users to submit a `ParameterChangeProposal``.
 
 ```bash
-origod tx gov submit-proposal param-change PROPOSAL_FILE [flags]
+exad tx gov submit-proposal param-change PROPOSAL_FILE [flags]
 ```
 
 ## gRPC

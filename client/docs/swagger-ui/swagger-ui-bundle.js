@@ -18338,7 +18338,7 @@
             orderof: "ℴ",
             ordf: "ª",
             ordm: "º",
-            origof: "⊶",
+            exaf: "⊶",
             oror: "⩖",
             orslope: "⩗",
             orv: "⩛",

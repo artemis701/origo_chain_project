@@ -8,7 +8,7 @@ A user can query the `x/recovery` module using the CLI, gRPC or REST.
 
 ## CLI
 
-Find below a list of `origod` commands added with the `x/recovery` module. You can obtain the full list by using the `origod` -h command.
+Find below a list of `exad` commands added with the `x/recovery` module. You can obtain the full list by using the `exad` -h command.
 
 ### Queries
 
@@ -18,7 +18,7 @@ The query commands allow users to query Recovery state.
 Allows users to query the module parameters.
 
 ```bash
-origod query recovery params [flags]
+exad query recovery params [flags]
 ```
 
 ## gRPC

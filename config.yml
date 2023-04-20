@@ -1,39 +1,39 @@
 accounts:
   - name: alice
-    coins: ["100000000uatom", "100000000000000000000pose"]
+    coins: ["100000000uatom", "100000000000000000000exa"]
   - name: bob
-    coins: ["5000000000000pose"]
+    coins: ["5000000000000exa"]
 validator:
   name: alice
-  staked: "100000000000000000000pose"
+  staked: "100000000000000000000exa"
 faucet:
   name: bob 
-  coins: ["10pose"]
+  coins: ["10exa"]
 build:
-  binary: "origod"
+  binary: "exad"
 init:
-  home: "$HOME/.origod"
+  home: "$HOME/.exad"
   app:
     evm-rpc:
       address: "0.0.0.0:8545"     # change the JSON-RPC address and port
       ws-address: "0.0.0.0:8546"  # change the JSON-RPC websocket address and port
 genesis:
-  chain_id: "origod_9000-1"
+  chain_id: "exa_2121-1"
   app_state:
     staking:
       params:
-        bond_denom: "cmu"
+        bond_denom: "exa"
     mint:
       params:
-        mint_denom: "cmu"
+        mint_denom: "exa"
     crisis:
       constant_fee:
-        denom: "cmu"
+        denom: "exa"
     gov:
       deposit_params:
         min_deposit:
           - amount: "10000000"
-            denom: "cmu"
+            denom: "exa"
     evm:
       params:
-        evm_denom: "cmu"
+        evm_denom: "exa"

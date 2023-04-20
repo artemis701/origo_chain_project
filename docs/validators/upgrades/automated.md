@@ -26,27 +26,27 @@ Set up the Cosmovisor environment variables. We recommend setting these in your 
 
 ```bash
 echo "# Setup Cosmovisor" >> ~/.profile
-echo "export DAEMON_NAME=origod" >> ~/.profile
-echo "export DAEMON_HOME=$HOME/.origod" >> ~/.profile
+echo "export DAEMON_NAME=exad" >> ~/.profile
+echo "export DAEMON_HOME=$HOME/.exad" >> ~/.profile
 source ~/.profile
 ```
 
-After this, you must make the necessary folders for `cosmosvisor` in your `DAEMON_HOME` directory (`~/.origod`) and copy over the current binary.
+After this, you must make the necessary folders for `cosmosvisor` in your `DAEMON_HOME` directory (`~/.exad`) and copy over the current binary.
 
 ```bash
-mkdir -p ~/.origod/cosmovisor
-mkdir -p ~/.origod/cosmovisor/genesis
-mkdir -p ~/.origod/cosmovisor/genesis/bin
-mkdir -p ~/.origod/cosmovisor/upgrades
+mkdir -p ~/.exad/cosmovisor
+mkdir -p ~/.exad/cosmovisor/genesis
+mkdir -p ~/.exad/cosmovisor/genesis/bin
+mkdir -p ~/.exad/cosmovisor/upgrades
 
-cp $GOPATH/bin/origod ~/.origod/cosmovisor/genesis/bin
+cp $GOPATH/bin/exad ~/.exad/cosmovisor/genesis/bin
 ```
 
-To check that you did this correctly, ensure your versions of `cosmovisor` and `origod` are the same:
+To check that you did this correctly, ensure your versions of `cosmovisor` and `exad` are the same:
 
 ```bash
 cosmovisor run version
-origod version
+exad version
 ```
 
 ### 2. Download the Evmos release
@@ -79,11 +79,11 @@ cosmovisor/
 ├── current/   # either genesis or upgrades/<name>
 ├── genesis
 │   └── bin
-│       └── origod
+│       └── exad
 └── upgrades
     └── v3.0.0
         ├── bin
-        │   └── origod
+        │   └── exad
         └── upgrade-info.json
 ```
 
@@ -112,7 +112,7 @@ cosmovisor run start
 You will need some way to keep the process always running. If you're on linux, you can do this by creating a service.
 
 ```bash
-sudo tee /etc/systemd/system/origod.service > /dev/null <<EOF
+sudo tee /etc/systemd/system/exad.service > /dev/null <<EOF
 [Unit]
 Description=Evmos Daemon
 After=network-online.target
@@ -124,8 +124,8 @@ Restart=always
 RestartSec=3
 LimitNOFILE=infinity
 
-Environment="DAEMON_HOME=$HOME/.origod"
-Environment="DAEMON_NAME=origod"
+Environment="DAEMON_HOME=$HOME/.exad"
+Environment="DAEMON_NAME=exad"
 Environment="DAEMON_ALLOW_DOWNLOAD_BINARIES=false"
 Environment="DAEMON_RESTART_AFTER_UPGRADE=true"
 
@@ -138,12 +138,12 @@ Then update and start the node
 
 ```bash
 sudo -S systemctl daemon-reload
-sudo -S systemctl enable origod
-sudo -S systemctl start origod
+sudo -S systemctl enable exad
+sudo -S systemctl start exad
 ```
 
 You can check the status with:
 
 ```bash
-systemctl status origod
+systemctl status exad
 ```

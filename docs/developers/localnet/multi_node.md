@@ -30,7 +30,7 @@ To build start a 4 node testnet run:
 make localnet-start
 ```
 
-This command creates a 4-node network using the `origodnode` Docker image.
+This command creates a 4-node network using the `exadnode` Docker image.
 The ports for each node are found in this table:
 
 | Node ID          | P2P Port | Tendermint RPC Port | REST/ Ethereum JSON-RPC Port | WebSocket Port |
@@ -51,10 +51,10 @@ The command above  command will run containers in the background using Docker co
 ```bash
 ...
 Creating network "evmos_localnet" with driver "bridge"
-Creating origodnode0 ... done
-Creating origodnode2 ... done
-Creating origodnode1 ... done
-Creating origodnode3 ... done
+Creating exadnode0 ... done
+Creating exadnode2 ... done
+Creating exadnode1 ... done
+Creating exadnode3 ... done
 ```
 
 ### Stop Localnet
@@ -68,55 +68,55 @@ make localnet-stop
 ### Configuration
 
 The `make localnet-start` creates files for a 4-node testnet in `./build` by
-calling the `origod testnet` command. This outputs a handful of files in the
+calling the `exad testnet` command. This outputs a handful of files in the
 `./build` directory:
 
 ```bash
 tree -L 3 build/
 
 build/
-├── origod
-├── origod
+├── exad
+├── exad
 ├── gentxs
 │   ├── node0.json
 │   ├── node1.json
 │   ├── node2.json
 │   └── node3.json
 ├── node0
-│   ├── origod
+│   ├── exad
 │   │   ├── key_seed.json
 │   │   └── keyring-test-cosmos
-│   └── origod
+│   └── exad
 │       ├── config
 │       ├── data
-│       └── origod.log
+│       └── exad.log
 ├── node1
-│   ├── origod
+│   ├── exad
 │   │   ├── key_seed.json
 │   │   └── keyring-test-cosmos
-│   └── origod
+│   └── exad
 │       ├── config
 │       ├── data
-│       └── origod.log
+│       └── exad.log
 ├── node2
-│   ├── origod
+│   ├── exad
 │   │   ├── key_seed.json
 │   │   └── keyring-test-cosmos
-│   └── origod
+│   └── exad
 │       ├── config
 │       ├── data
-│       └── origod.log
+│       └── exad.log
 └── node3
-    ├── origod
+    ├── exad
     │   ├── key_seed.json
     │   └── keyring-test-cosmos
-    └── origod
+    └── exad
         ├── config
         ├── data
-        └── origod.log
+        └── exad.log
 ```
 
-Each `./build/nodeN` directory is mounted to the `/origod` directory in each container.
+Each `./build/nodeN` directory is mounted to the `/exad` directory in each container.
 
 ### Logging
 
@@ -124,10 +124,10 @@ In order to see the logs of a particular node you can use the following command:
 
 ```bash
 # node 0: daemon logs
-docker exec origodnode0 tail origod.log
+docker exec exadnode0 tail exad.log
 
 # node 0: REST & RPC logs
-docker exec origodnode0 tail origod.log
+docker exec exadnode0 tail exad.log
 ```
 
 The logs for the daemon will look like:
@@ -165,7 +165,7 @@ You can also watch logs as they are produced via Docker with the `--follow` (`-f
 example:
 
 ```bash
-docker logs -f origodnode0
+docker logs -f exadnode0
 ```
 
 ### Interact with the Localnet
@@ -192,18 +192,18 @@ Additional instructions on how to interact with the WebSocket can be found on th
 
 ### Keys & Accounts
 
-To interact with `origod` and start querying state or creating txs, you use the
-`origod` directory of any given node as your `home`, for example:
+To interact with `exad` and start querying state or creating txs, you use the
+`exad` directory of any given node as your `home`, for example:
 
 ```bash
-origod keys list --home ./build/node0/origod
+exad keys list --home ./build/node0/exad
 ```
 
 Now that accounts exists, you may create new accounts and send those accounts
 funds!
 
 ::: tip
-**Note**: Each node's seed is located at `./build/nodeN/origod/key_seed.json` and can be restored to the CLI using the `origod keys add --restore` command
+**Note**: Each node's seed is located at `./build/nodeN/exad/key_seed.json` and can be restored to the CLI using the `exad keys add --restore` command
 :::
 
 ### Special Binaries

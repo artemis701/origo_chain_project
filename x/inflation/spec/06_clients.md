@@ -9,8 +9,8 @@ REST.
 
 ## CLI
 
-Find below a list of `origod` commands added with the `x/inflation` module. You
-can obtain the full list by using the `origod -h` command.
+Find below a list of `exad` commands added with the `x/inflation` module. You
+can obtain the full list by using the `exad -h` command.
 
 ### Queries
 
@@ -21,7 +21,7 @@ The `query` commands allow users to query `inflation` state.
 Allows users to query the current inflation period.
 
 ```go
-origod query inflation period [flags]
+exad query inflation period [flags]
 ```
 
 **`epoch-mint-provision`**
@@ -29,7 +29,7 @@ origod query inflation period [flags]
 Allows users to query the current inflation epoch provisions value.
 
 ```go
-origod query inflation epoch-mint-provision [flags]
+exad query inflation epoch-mint-provision [flags]
 ```
 
 **`skipped-epochs`**
@@ -37,7 +37,7 @@ origod query inflation epoch-mint-provision [flags]
 Allows users to query the current number of skipped epochs.
 
 ```go
-origod query inflation skipped-epochs [flags]
+exad query inflation skipped-epochs [flags]
 ```
 
 **`total-supply`**
@@ -45,7 +45,7 @@ origod query inflation skipped-epochs [flags]
 Allows users to query the total supply of tokens in circulation.
 
 ```go
-origod query inflation total-supply [flags]
+exad query inflation total-supply [flags]
 ```
 
 **`inflation-rate`**
@@ -53,7 +53,7 @@ origod query inflation total-supply [flags]
 Allows users to query the inflation rate of the current period.
 
 ```go
-origod query inflation inflation-rate [flags]
+exad query inflation inflation-rate [flags]
 ```
 
 **`params`**
@@ -61,7 +61,7 @@ origod query inflation inflation-rate [flags]
 Allows users to query the current inflation parameters.
 
 ```go
-origod query inflation params [flags]
+exad query inflation params [flags]
 ```
 
 ### Proposals
@@ -74,7 +74,7 @@ using the governance module CLI:
 Allows users to submit a `ParameterChangeProposal`.
 
 ```bash
-origod tx gov submit-proposal param-change [proposal-file] [flags]
+exad tx gov submit-proposal param-change [proposal-file] [flags]
 ```
 
 ## gRPC

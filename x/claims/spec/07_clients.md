@@ -8,7 +8,7 @@ A user can query the `x/claims` module using the CLI, gRPC or REST.
 
 ## CLI
 
-Find below a list of `origod` commands added with the `x/claims` module. You can obtain the full list by using the `origod -h` command.
+Find below a list of `exad` commands added with the `x/claims` module. You can obtain the full list by using the `exad -h` command.
 
 ### Queries
 
@@ -19,7 +19,7 @@ The `query` commands allow users to query `claims` state.
 Allows users to query total amount of unclaimed tokens from the airdrop.
 
 ```bash
-origod query claims total-unclaimed [flags]
+exad query claims total-unclaimed [flags]
 ```
 
 **`records`**
@@ -27,7 +27,7 @@ origod query claims total-unclaimed [flags]
 Allows users to query all the claims records available.
 
 ```bash
-origod query claims records [flags]
+exad query claims records [flags]
 ```
 
 **`record`**
@@ -35,7 +35,7 @@ origod query claims records [flags]
 Allows users to query a claims record for a given user.
 
 ```bash
-origod query claims record ADDRESS [flags]
+exad query claims record ADDRESS [flags]
 ```
 
 **`params`**
@@ -43,7 +43,7 @@ origod query claims record ADDRESS [flags]
 Allows users to query claims params.
 
 ```bash
-origod query claims params [flags]
+exad query claims params [flags]
 ```
 
 ## gRPC

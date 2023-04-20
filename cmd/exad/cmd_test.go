@@ -10,11 +10,11 @@ import (
 	"github.com/stretchr/testify/require"
 
 	"github.com/evmos/evmos/v10/app"
-	origod "github.com/evmos/evmos/v10/cmd/origod"
+	exad "github.com/evmos/evmos/v10/cmd/exad"
 )
 
 func TestInitCmd(t *testing.T) {
-	rootCmd, _ := origod.NewRootCmd()
+	rootCmd, _ := exad.NewRootCmd()
 	rootCmd.SetArgs([]string{
 		"init",       // Test the init cmd
 		"evmos-test", // Moniker
@@ -22,12 +22,12 @@ func TestInitCmd(t *testing.T) {
 		fmt.Sprintf("--%s=%s", flags.FlagChainID, "compose_1-1"),
 	})
 
-	err := svrcmd.Execute(rootCmd, "origod", app.DefaultNodeHome)
+	err := svrcmd.Execute(rootCmd, "exad", app.DefaultNodeHome)
 	require.NoError(t, err)
 }
 
 func TestAddKeyLedgerCmd(t *testing.T) {
-	rootCmd, _ := origod.NewRootCmd()
+	rootCmd, _ := exad.NewRootCmd()
 	rootCmd.SetArgs([]string{
 		"keys",
 		"add",
@@ -35,6 +35,6 @@ func TestAddKeyLedgerCmd(t *testing.T) {
 		fmt.Sprintf("--%s", flags.FlagUseLedger),
 	})
 
-	err := svrcmd.Execute(rootCmd, "origod", app.DefaultNodeHome)
+	err := svrcmd.Execute(rootCmd, "exad", app.DefaultNodeHome)
 	require.Error(t, err)
 }

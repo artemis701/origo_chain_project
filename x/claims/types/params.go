@@ -13,8 +13,8 @@ import (
 )
 
 var (
-	// DefaultClaimsDenom is cmu
-	DefaultClaimsDenom = "cmu"
+	// DefaultClaimsDenom is exa
+	DefaultClaimsDenom = "exa"
 	// DefaultDurationUntilDecay is 1 month = 30.4375 days
 	DefaultDurationUntilDecay = 2629800 * time.Second
 	// DefaultDurationOfDecay is 2 months

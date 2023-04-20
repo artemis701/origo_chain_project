@@ -86,4 +86,4 @@ See our open positions on [Cosmos Jobs](https://jobs.cosmos.network/project/evmo
 
 # send tokens to seed validaotor and run following to create validator
 
-origod tx staking create-validator --from <VALIDATOR_KEY> --moniker thomas --pubkey $(origod tendermint show-validator) --chain-id <MAINNODE_CHAIN_ID> --keyring-backend test --amount 1cmu --commission-max-change-rate 0.01 --commission-max-rate 0.2 --commission-rate 0.1 --min-self-delegation 1 --fees 20000acmu -b block --gas auto
+exad tx staking create-validator --from <VALIDATOR_KEY> --moniker thomas --pubkey $(exad tendermint show-validator) --chain-id <MAINNODE_CHAIN_ID> --keyring-backend test --amount 1exa --commission-max-change-rate 0.01 --commission-max-rate 0.2 --commission-rate 0.1 --min-self-delegation 1 --fees 20000aexa -b block --gas auto

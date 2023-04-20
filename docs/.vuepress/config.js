@@ -61,7 +61,7 @@ module.exports = {
     ["meta", { name: "msapplication-TileColor", content: "#2e3148" }],
     ["meta", { name: "theme-color", content: "#ffffff" }],
     ["link", { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
-    // ['link', { rel: "apple-touch-icon-preorigod", href: "/apple-touch-icon-preorigod.png" }],
+    // ['link', { rel: "apple-touch-icon-preexad", href: "/apple-touch-icon-preexad.png" }],
   ],
   themeConfig: {
     repo: "evmos/evmos",
@@ -74,7 +74,7 @@ module.exports = {
       name: "Evmos",
       denom: "Evmos",
       ticker: "EVMOS",
-      binary: "origod",
+      binary: "exad",
       testnet_denom: "tEvmos",
       testnet_ticker: "tEVMOS",
       rpc_url: "https://eth.bd.evmos.org:8545",

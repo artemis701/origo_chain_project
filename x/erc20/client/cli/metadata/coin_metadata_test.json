@@ -4,7 +4,7 @@
       "description": "The native staking and governance token of the Evmos chain",
       "denom_units": [
         {
-          "denom": "cmu",
+          "denom": "exa",
           "exponent": 0
         },
         {
@@ -12,9 +12,9 @@
           "exponent": 18
         }
       ],
-      "base": "cmu",
-      "display": "cmu",
-      "name": "cmu",
+      "base": "exa",
+      "display": "exa",
+      "name": "exa",
       "symbol": "EVMOS"
     }
   ]

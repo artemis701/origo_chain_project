@@ -13,20 +13,20 @@ The keyring holds the private/public keypairs used to interact with the node. Fo
 You can use the following commands for help with the `keys` command and for more information about a particular subcommand, respectively:
 
 ```bash
-origod keys
+exad keys
 ```
 
 ```bash
-origod keys [command] --help
+exad keys [command] --help
 ```
 
 To create a new key in the keyring, run the `add` subcommand with a `<key_name>` argument. You will have to provide a password for the newly generated key. This key will be used in the next section.
 
 ```bash
-origod keys add dev0
+exad keys add dev0
 
 # Put the generated address in a variable for later use.
-MY_VALIDATOR_ADDRESS=$(origod keys show dev0 -a)
+MY_VALIDATOR_ADDRESS=$(exad keys show dev0 -a)
 ```
 
 This command generates a new 24-word mnemonic phrase, persists it to the relevant backend, and outputs information about the keypair. If this keypair will be used to hold value-bearing tokens, be sure to write down the mnemonic phrase somewhere safe!
@@ -80,10 +80,10 @@ for multiple prompts:
 
 ```bash
 # assuming that KEYPASSWD is set in the environment
-yes $KEYPASSWD | origod keys add me
-yes $KEYPASSWD | origod keys show me
-# start origod with keyring-backend flag
-origod --keyring-backend=file start
+yes $KEYPASSWD | exad keys add me
+yes $KEYPASSWD | exad keys show me
+# start exad with keyring-backend flag
+exad --keyring-backend=file start
 ```
 
 ::: tip

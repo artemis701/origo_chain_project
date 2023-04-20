@@ -256,9 +256,9 @@ func TestGetReceivedCoin(t *testing.T) {
 			"channel-0",
 			"transfer",
 			"channel-0",
-			"transfer/channel-0/cmu",
+			"transfer/channel-0/exa",
 			"10",
-			sdk.Coin{Denom: "cmu", Amount: sdk.NewInt(10)},
+			sdk.Coin{Denom: "exa", Amount: sdk.NewInt(10)},
 		},
 		{
 			"transfer 2x ibc wrapped coin to destination which is its source",
@@ -296,14 +296,14 @@ func TestGetSentCoin(t *testing.T) {
 		expCoin   sdk.Coin
 	}{
 		{
-			"get unwrapped cmu coin",
-			"cmu",
+			"get unwrapped exa coin",
+			"exa",
 			"10",
-			sdk.Coin{Denom: "cmu", Amount: sdk.NewInt(10)},
+			sdk.Coin{Denom: "exa", Amount: sdk.NewInt(10)},
 		},
 		{
-			"get ibc wrapped cmu coin",
-			"transfer/channel-0/cmu",
+			"get ibc wrapped exa coin",
+			"transfer/channel-0/exa",
 			"10",
 			sdk.Coin{Denom: teststypes.poseIbcdenom, Amount: sdk.NewInt(10)},
 		},

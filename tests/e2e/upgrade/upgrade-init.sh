@@ -17,104 +17,104 @@ command -v jq > /dev/null 2>&1 || { echo >&2 "jq not installed. More info: https
 set -e
 
 # Set client config
-origod config keyring-backend "$KEYRING"
-origod config chain-id "$CHAINID"
+exad config keyring-backend "$KEYRING"
+exad config chain-id "$CHAINID"
 
 # if $KEY exists it should be deleted
-origod keys add "$KEY" --keyring-backend $KEYRING --algo "$KEYALGO"
+exad keys add "$KEY" --keyring-backend $KEYRING --algo "$KEYALGO"
 
 # Set moniker and chain-id for Evmos (Moniker can be anything, chain-id must be an integer)
-origod init "$MONIKER" --chain-id "$CHAINID"
+exad init "$MONIKER" --chain-id "$CHAINID"
 
-# Change parameter token denominations to cmu
-cat "$HOME"/.origod/config/genesis.json | jq '.app_state["staking"]["params"]["bond_denom"]="cmu"' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
-cat "$HOME"/.origod/config/genesis.json | jq '.app_state["crisis"]["constant_fee"]["denom"]="cmu"' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
-cat "$HOME"/.origod/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="cmu"' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
-cat "$HOME"/.origod/config/genesis.json | jq '.app_state["evm"]["params"]["evm_denom"]="cmu"' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
-cat "$HOME"/.origod/config/genesis.json | jq '.app_state["inflation"]["params"]["mint_denom"]="cmu"' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
+# Change parameter token denominations to exa
+cat "$HOME"/.exad/config/genesis.json | jq '.app_state["staking"]["params"]["bond_denom"]="exa"' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq '.app_state["crisis"]["constant_fee"]["denom"]="exa"' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["min_deposit"][0]["denom"]="exa"' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq '.app_state["evm"]["params"]["evm_denom"]="exa"' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq '.app_state["inflation"]["params"]["mint_denom"]="exa"' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
 
 # set gov proposing && voting period
-cat "$HOME"/.origod/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["max_deposit_period"]="30s"' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
-cat "$HOME"/.origod/config/genesis.json | jq '.app_state["gov"]["voting_params"]["voting_period"]="30s"' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq '.app_state["gov"]["deposit_params"]["max_deposit_period"]="30s"' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq '.app_state["gov"]["voting_params"]["voting_period"]="30s"' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
 
 # Set gas limit in genesis
-cat "$HOME"/.origod/config/genesis.json | jq '.consensus_params["block"]["max_gas"]="10000000"' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq '.consensus_params["block"]["max_gas"]="10000000"' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
 
 # Set claims start time
-node_address=$(origod keys list | grep  "address: " | cut -c12-)
+node_address=$(exad keys list | grep  "address: " | cut -c12-)
 current_date=$(date -u +"%Y-%m-%dT%TZ")
-cat "$HOME"/.origod/config/genesis.json | jq -r --arg current_date "$current_date" '.app_state["claims"]["params"]["airdrop_start_time"]=$current_date' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq -r --arg current_date "$current_date" '.app_state["claims"]["params"]["airdrop_start_time"]=$current_date' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
 
 # Set claims records for validator account
 amount_to_claim=10000
-cat "$HOME"/.origod/config/genesis.json | jq -r --arg node_address "$node_address" --arg amount_to_claim "$amount_to_claim" '.app_state["claims"]["claims_records"]=[{"initial_claimable_amount":$amount_to_claim, "actions_completed":[false, false, false, false],"address":$node_address}]' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq -r --arg node_address "$node_address" --arg amount_to_claim "$amount_to_claim" '.app_state["claims"]["claims_records"]=[{"initial_claimable_amount":$amount_to_claim, "actions_completed":[false, false, false, false],"address":$node_address}]' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
 
 # Set claims decay
-cat "$HOME"/.origod/config/genesis.json | jq '.app_state["claims"]["params"]["duration_of_decay"]="1000000s"' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
-cat "$HOME"/.origod/config/genesis.json | jq '.app_state["claims"]["params"]["duration_until_decay"]="100000s"' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq '.app_state["claims"]["params"]["duration_of_decay"]="1000000s"' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq '.app_state["claims"]["params"]["duration_until_decay"]="100000s"' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
 
 # Claim module account:
 # 0xA61808Fe40fEb8B3433778BBC2ecECCAA47c8c47 || evmos15cvq3ljql6utxseh0zau9m8ve2j8erz89m5wkz
-cat "$HOME"/.origod/config/genesis.json | jq -r --arg amount_to_claim "$amount_to_claim" '.app_state["bank"]["balances"] += [{"address":"pose1s52syxavznw2849aw9wh86uryjsz2647yd58dh","coins":[{"denom":"cmu", "amount":$amount_to_claim}]}]' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq -r --arg amount_to_claim "$amount_to_claim" '.app_state["bank"]["balances"] += [{"address":"pose1s52syxavznw2849aw9wh86uryjsz2647yd58dh","coins":[{"denom":"exa", "amount":$amount_to_claim}]}]' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
 
 # disable produce empty block
 if [[ "$OSTYPE" == "darwin"* ]]; then
-    sed -i '' 's/create_empty_blocks = true/create_empty_blocks = false/g' "$HOME"/.origod/config/config.toml
+    sed -i '' 's/create_empty_blocks = true/create_empty_blocks = false/g' "$HOME"/.exad/config/config.toml
   else
-    sed -i 's/create_empty_blocks = true/create_empty_blocks = false/g' "$HOME"/.origod/config/config.toml
+    sed -i 's/create_empty_blocks = true/create_empty_blocks = false/g' "$HOME"/.exad/config/config.toml
 fi
 
 if [[ $1 == "pending" ]]; then
   if [[ "$OSTYPE" == "darwin"* ]]; then
-      sed -i '' 's/create_empty_blocks_interval = "0s"/create_empty_blocks_interval = "30s"/g' "$HOME"/.origod/config/config.toml
-      sed -i '' 's/timeout_propose = "3s"/timeout_propose = "30s"/g' "$HOME"/.origod/config/config.toml
-      sed -i '' 's/timeout_propose_delta = "500ms"/timeout_propose_delta = "5s"/g' "$HOME"/.origod/config/config.toml
-      sed -i '' 's/timeout_prevote = "1s"/timeout_prevote = "10s"/g' "$HOME"/.origod/config/config.toml
-      sed -i '' 's/timeout_prevote_delta = "500ms"/timeout_prevote_delta = "5s"/g' "$HOME"/.origod/config/config.toml
-      sed -i '' 's/timeout_precommit = "1s"/timeout_precommit = "10s"/g' "$HOME"/.origod/config/config.toml
-      sed -i '' 's/timeout_precommit_delta = "500ms"/timeout_precommit_delta = "5s"/g' "$HOME"/.origod/config/config.toml
-      sed -i '' 's/timeout_commit = "5s"/timeout_commit = "150s"/g' "$HOME"/.origod/config/config.toml
-      sed -i '' 's/timeout_broadcast_tx_commit = "10s"/timeout_broadcast_tx_commit = "150s"/g' "$HOME"/.origod/config/config.toml
+      sed -i '' 's/create_empty_blocks_interval = "0s"/create_empty_blocks_interval = "30s"/g' "$HOME"/.exad/config/config.toml
+      sed -i '' 's/timeout_propose = "3s"/timeout_propose = "30s"/g' "$HOME"/.exad/config/config.toml
+      sed -i '' 's/timeout_propose_delta = "500ms"/timeout_propose_delta = "5s"/g' "$HOME"/.exad/config/config.toml
+      sed -i '' 's/timeout_prevote = "1s"/timeout_prevote = "10s"/g' "$HOME"/.exad/config/config.toml
+      sed -i '' 's/timeout_prevote_delta = "500ms"/timeout_prevote_delta = "5s"/g' "$HOME"/.exad/config/config.toml
+      sed -i '' 's/timeout_precommit = "1s"/timeout_precommit = "10s"/g' "$HOME"/.exad/config/config.toml
+      sed -i '' 's/timeout_precommit_delta = "500ms"/timeout_precommit_delta = "5s"/g' "$HOME"/.exad/config/config.toml
+      sed -i '' 's/timeout_commit = "5s"/timeout_commit = "150s"/g' "$HOME"/.exad/config/config.toml
+      sed -i '' 's/timeout_broadcast_tx_commit = "10s"/timeout_broadcast_tx_commit = "150s"/g' "$HOME"/.exad/config/config.toml
   else
-      sed -i 's/create_empty_blocks_interval = "0s"/create_empty_blocks_interval = "30s"/g' "$HOME"/.origod/config/config.toml
-      sed -i 's/timeout_propose = "3s"/timeout_propose = "30s"/g' "$HOME"/.origod/config/config.toml
-      sed -i 's/timeout_propose_delta = "500ms"/timeout_propose_delta = "5s"/g' "$HOME"/.origod/config/config.toml
-      sed -i 's/timeout_prevote = "1s"/timeout_prevote = "10s"/g' "$HOME"/.origod/config/config.toml
-      sed -i 's/timeout_prevote_delta = "500ms"/timeout_prevote_delta = "5s"/g' "$HOME"/.origod/config/config.toml
-      sed -i 's/timeout_precommit = "1s"/timeout_precommit = "10s"/g' "$HOME"/.origod/config/config.toml
-      sed -i 's/timeout_precommit_delta = "500ms"/timeout_precommit_delta = "5s"/g' "$HOME"/.origod/config/config.toml
-      sed -i 's/timeout_commit = "5s"/timeout_commit = "150s"/g' "$HOME"/.origod/config/config.toml
-      sed -i 's/timeout_broadcast_tx_commit = "10s"/timeout_broadcast_tx_commit = "150s"/g' "$HOME"/.origod/config/config.toml
+      sed -i 's/create_empty_blocks_interval = "0s"/create_empty_blocks_interval = "30s"/g' "$HOME"/.exad/config/config.toml
+      sed -i 's/timeout_propose = "3s"/timeout_propose = "30s"/g' "$HOME"/.exad/config/config.toml
+      sed -i 's/timeout_propose_delta = "500ms"/timeout_propose_delta = "5s"/g' "$HOME"/.exad/config/config.toml
+      sed -i 's/timeout_prevote = "1s"/timeout_prevote = "10s"/g' "$HOME"/.exad/config/config.toml
+      sed -i 's/timeout_prevote_delta = "500ms"/timeout_prevote_delta = "5s"/g' "$HOME"/.exad/config/config.toml
+      sed -i 's/timeout_precommit = "1s"/timeout_precommit = "10s"/g' "$HOME"/.exad/config/config.toml
+      sed -i 's/timeout_precommit_delta = "500ms"/timeout_precommit_delta = "5s"/g' "$HOME"/.exad/config/config.toml
+      sed -i 's/timeout_commit = "5s"/timeout_commit = "150s"/g' "$HOME"/.exad/config/config.toml
+      sed -i 's/timeout_broadcast_tx_commit = "10s"/timeout_broadcast_tx_commit = "150s"/g' "$HOME"/.exad/config/config.toml
   fi
 fi
 
 # Allocate genesis accounts (cosmos formatted addresses)
-origod add-genesis-account $KEY 100000000000000000000000000pose --keyring-backend $KEYRING
+exad add-genesis-account $KEY 100000000000000000000000000pose --keyring-backend $KEYRING
 
 # Update total supply with claim values
 # Bc is required to add this big numbers
 # total_supply=$(bc <<< "$amount_to_claim+$validators_supply")
 total_supply=100000000000000000000010000
-cat "$HOME"/.origod/config/genesis.json | jq -r --arg total_supply "$total_supply" '.app_state["bank"]["supply"][0]["amount"]=$total_supply' > "$HOME"/.origod/config/tmp_genesis.json && mv "$HOME"/.origod/config/tmp_genesis.json "$HOME"/.origod/config/genesis.json
+cat "$HOME"/.exad/config/genesis.json | jq -r --arg total_supply "$total_supply" '.app_state["bank"]["supply"][0]["amount"]=$total_supply' > "$HOME"/.exad/config/tmp_genesis.json && mv "$HOME"/.exad/config/tmp_genesis.json "$HOME"/.exad/config/genesis.json
 
 # Sign genesis transaction
-origod gentx $KEY 1000000000000000000000pose --keyring-backend $KEYRING --chain-id "$CHAINID"
+exad gentx $KEY 1000000000000000000000pose --keyring-backend $KEYRING --chain-id "$CHAINID"
 ## In case you want to create multiple validators at genesis
-## 1. Back to `origod keys add` step, init more keys
-## 2. Back to `origod add-genesis-account` step, add balance for those
-## 3. Clone this ~/.origod home directory into some others, let's say `~/.clonedorigod`
+## 1. Back to `exad keys add` step, init more keys
+## 2. Back to `exad add-genesis-account` step, add balance for those
+## 3. Clone this ~/.exad home directory into some others, let's say `~/.clonedexad`
 ## 4. Run `gentx` in each of those folders
-## 5. Copy the `gentx-*` folders under `~/.clonedorigod/config/gentx/` folders into the original `~/.origod/config/gentx`
+## 5. Copy the `gentx-*` folders under `~/.clonedexad/config/gentx/` folders into the original `~/.exad/config/gentx`
 
 # Collect genesis tx
-origod collect-gentxs
+exad collect-gentxs
 
 # Run this to ensure everything worked and that the genesis file is setup correctly
-origod validate-genesis
+exad validate-genesis
 
 if [[ $1 == "pending" ]]; then
   echo "pending mode is on, please wait for the first block committed."
 fi
 
 # Start the node (remove the --pruning=nothing flag if historical queries are not needed)
-origod start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --minimum-gas-prices=0.0001pose --json-rpc.api eth,txpool,personal,net,debug,web3
+exad start --pruning=nothing "$TRACE" --log_level $LOGLEVEL --minimum-gas-prices=0.0001pose --json-rpc.api eth,txpool,personal,net,debug,web3

@@ -8,8 +8,8 @@
 ## USAGE RUNDOWN
 # Not for use on live nodes
 # For use when testing.
-# Assumes that ~/.origod doesn't exist
-# can be modified to suit your purposes if ~/.origod does already exist
+# Assumes that ~/.exad doesn't exist
+# can be modified to suit your purposes if ~/.exad does already exist
 
 
 set -uxe
@@ -31,11 +31,11 @@ go install ./...
 # go install -ldflags '-w -s -X github.com/cosmos/cosmos-sdk/types.DBBackend=boltdb' -tags boltdb ./...
 
 # Initialize chain.
-origod init test --chain-id compose_1-1
+exad init test --chain-id compose_1-1
 
 # Get Genesis
 wget https://archive.evmos.org/mainnet/genesis.json
-mv genesis.json ~/.origod/config/
+mv genesis.json ~/.exad/config/
 
 
 # Get "trust_hash" and "trust_height".
@@ -49,14 +49,14 @@ echo "trust_height: $BLOCK_HEIGHT"
 echo "trust_hash: $TRUST_HASH"
 
 # Export state sync variables.
-export origod_STATESYNC_ENABLE=true
-export origod_P2P_MAX_NUM_OUTBOUND_PEERS=200
-export origod_STATESYNC_RPC_SERVERS="https://rpc.evmos.interbloc.org:443,https://evmos-rpc.polkachu.com:443,https://tendermint.bd.evmos.org:26657,https://rpc.evmos.posthuman.digital:443,https://rpc.evmos.testnet.run:443,https://rpc.evmos.bh.rocks:443"
-export origod_STATESYNC_TRUST_HEIGHT=$BLOCK_HEIGHT
-export origod_STATESYNC_TRUST_HASH=$TRUST_HASH
+export exad_STATESYNC_ENABLE=true
+export exad_P2P_MAX_NUM_OUTBOUND_PEERS=200
+export exad_STATESYNC_RPC_SERVERS="https://rpc.evmos.interbloc.org:443,https://evmos-rpc.polkachu.com:443,https://tendermint.bd.evmos.org:26657,https://rpc.evmos.posthuman.digital:443,https://rpc.evmos.testnet.run:443,https://rpc.evmos.bh.rocks:443"
+export exad_STATESYNC_TRUST_HEIGHT=$BLOCK_HEIGHT
+export exad_STATESYNC_TRUST_HASH=$TRUST_HASH
 
 # Fetch and set list of seeds from chain registry.
-export origod_P2P_SEEDS=$(curl -s https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/chain.json | jq -r '[foreach .peers.seeds[] as $item (""; "\($item.id)@\($item.address)")] | join(",")')
+export exad_P2P_SEEDS=$(curl -s https://raw.githubusercontent.com/cosmos/chain-registry/master/evmos/chain.json | jq -r '[foreach .peers.seeds[] as $item (""; "\($item.id)@\($item.address)")] | join(",")')
 
 # Start chain.
-origod start --x-crisis-skip-assert-invariants 
+exad start --x-crisis-skip-assert-invariants 

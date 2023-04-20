@@ -8,7 +8,7 @@ A user can query the `x/incentives` module using the CLI, JSON-RPC, gRPC or REST
 
 ## CLI
 
-Find below a list of `origod` commands added with the `x/incentives` module. You can obtain the full list by using the `origod -h` command.
+Find below a list of `exad` commands added with the `x/incentives` module. You can obtain the full list by using the `exad -h` command.
 
 ### Queries
 
@@ -19,7 +19,7 @@ The `query` commands allow users to query `incentives` state.
 Allows users to query all registered incentives.
 
 ```go
-origod query incentives incentives [flags]
+exad query incentives incentives [flags]
 ```
 
 **`incentive`**
@@ -27,7 +27,7 @@ origod query incentives incentives [flags]
 Allows users to query an incentive for a given contract.
 
 ```go
-origod query incentives incentive CONTRACT_ADDRESS [flags]
+exad query incentives incentive CONTRACT_ADDRESS [flags]
 ```
 
 **`gas-meters`**
@@ -35,7 +35,7 @@ origod query incentives incentive CONTRACT_ADDRESS [flags]
 Allows users to query all gas meters for a given incentive.
 
 ```bash
-origod query incentives gas-meters CONTRACT_ADDRESS [flags]
+exad query incentives gas-meters CONTRACT_ADDRESS [flags]
 ```
 
 **`gas-meter`**
@@ -43,7 +43,7 @@ origod query incentives gas-meters CONTRACT_ADDRESS [flags]
 Allows users to query a gas meter for a given incentive and user.
 
 ```go
-origod query incentives gas-meter CONTRACT_ADDRESS PARTICIPANT_ADDRESS [flags]
+exad query incentives gas-meter CONTRACT_ADDRESS PARTICIPANT_ADDRESS [flags]
 ```
 
 **`params`**
@@ -51,7 +51,7 @@ origod query incentives gas-meter CONTRACT_ADDRESS PARTICIPANT_ADDRESS [flags]
 Allows users to query incentives params.
 
 ```bash
-origod query incentives params [flags]
+exad query incentives params [flags]
 ```
 
 ### Proposals
@@ -63,7 +63,7 @@ The `tx gov submit-proposal` commands allow users to query create a proposal usi
 Allows users to submit a `RegisterIncentiveProposal`.
 
 ```bash
-origod tx gov submit-proposal register-incentive CONTRACT_ADDRESS ALLOCATION EPOCHS [flags]
+exad tx gov submit-proposal register-incentive CONTRACT_ADDRESS ALLOCATION EPOCHS [flags]
 ```
 
 **`cancel-incentive`**
@@ -71,7 +71,7 @@ origod tx gov submit-proposal register-incentive CONTRACT_ADDRESS ALLOCATION EPO
 Allows users to submit a `CanelIncentiveProposal`.
 
 ```bash
-origod tx gov submit-proposal cancel-incentive CONTRACT_ADDRESS [flags]
+exad tx gov submit-proposal cancel-incentive CONTRACT_ADDRESS [flags]
 ```
 
 **`param-change`**
@@ -79,7 +79,7 @@ origod tx gov submit-proposal cancel-incentive CONTRACT_ADDRESS [flags]
 Allows users to submit a `ParameterChangeProposal``.
 
 ```bash
-origod tx gov submit-proposal param-change PROPOSAL_FILE [flags]
+exad tx gov submit-proposal param-change PROPOSAL_FILE [flags]
 ```
 
 ## gRPC

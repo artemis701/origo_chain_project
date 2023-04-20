@@ -22,7 +22,7 @@ go version
 ```
 
 :::tip
-If the `origod: command not found` error message is returned, confirm that your [`GOPATH`](https://golang.org/doc/gopath_code#GOPATH) is correctly configured by running the following command:
+If the `exad: command not found` error message is returned, confirm that your [`GOPATH`](https://golang.org/doc/gopath_code#GOPATH) is correctly configured by running the following command:
 
 ```bash
 export PATH=$PATH:$(go env GOPATH)/bin
@@ -53,7 +53,7 @@ make install
 After installation is done, check that the `{{ $themeConfig.project.binary }}` binaries have been successfully installed:
 
 ```bash
-origod version
+exad version
 ```
 
 ### Docker
@@ -64,14 +64,14 @@ You can build {{ $themeConfig.project.name }} using Docker by running:
 make build-docker
 ```
 
-The command above will create a docker container: `tharsishq/evmos:latest`. Now you can run `origod` in the container.
+The command above will create a docker container: `tharsishq/evmos:latest`. Now you can run `exad` in the container.
 
 ```bash
-docker run -it -p 26657:26657 -p 26656:26656 -v ~/.origod/:/root/.origod tharsishq/evmos:latest origod version
+docker run -it -p 26657:26657 -p 26656:26656 -v ~/.exad/:/root/.exad tharsishq/evmos:latest exad version
 
 # To initialize
-# docker run -it -p 26657:26657 -p 26656:26656 -v ~/.origod/:/root/.origod tharsishq/evmos:latest origod init test-chain --chain-id test_9000-2
+# docker run -it -p 26657:26657 -p 26656:26656 -v ~/.exad/:/root/.exad tharsishq/evmos:latest exad init test-chain --chain-id test_9000-2
 
 # To run
-# docker run -it -p 26657:26657 -p 26656:26656 -v ~/.origod/:/root/.origod tharsishq/evmos:latest origod start
+# docker run -it -p 26657:26657 -p 26656:26656 -v ~/.exad/:/root/.exad tharsishq/evmos:latest exad start
 ```
